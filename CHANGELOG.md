@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/koesterlab/alignoth/compare/v0.2.2...v0.3.0) (2022-06-28)
+
+
+### Features
+
+* Support multiple output formats ([#11](https://github.com/koesterlab/alignoth/issues/11)) ([53bfe08](https://github.com/koesterlab/alignoth/commit/53bfe08f06d1a6e4b81267a23a5da93d76ea4425))
+
 ## [0.2.2](https://github.com/koesterlab/alignoth/compare/v0.2.1...v0.2.2) (2022-06-27)
 
 
