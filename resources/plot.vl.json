@@ -1,5 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "height": {"step": 8},
     "resolve": {
         "scale": {
             "strokeWidth": "independent"

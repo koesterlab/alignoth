@@ -25,7 +25,7 @@ pub(crate) fn create_plot_data<P: AsRef<Path> + std::fmt::Debug>(
     ref_path: P,
     region: &Region,
     max_read_depth: usize,
-) -> Result<(Vec<Read>, Reference, u32)> {
+) -> Result<(Vec<Read>, Reference)> {
     let mut bam = bam::IndexedReader::from_path(&bam_path)?;
     let tid = bam.header().tid(region.target.as_bytes()).unwrap() as i32;
     bam.fetch(FetchRegion(tid, region.start, region.end))?;
@@ -35,16 +35,11 @@ pub(crate) fn create_plot_data<P: AsRef<Path> + std::fmt::Debug>(
         .map(|r| Read::from_record(r, &ref_path, &region.target).unwrap())
         .collect_vec();
     data.order(max_read_depth)?;
-    let read_depth = if data.is_empty() {
-        0
-    } else {
-        data.iter().map(|r| r.row.unwrap()).max().unwrap()
-    };
     let reference_data = Reference {
         start: region.start,
         reference: read_fasta(ref_path, region)?.iter().collect(),
     };
-    Ok((data, reference_data, read_depth))
+    Ok((data, reference_data))
 }
 
 /// Reads the given region from the given fasta file and returns it as a vec of the bases as chars
@@ -357,7 +352,6 @@ mod tests {
     };
     use itertools::Itertools;
     use rust_htslib::bam::record::{Cigar, CigarString, CigarStringView};
-    use serde_json::json;
     use std::str::FromStr;
 
     #[test]
@@ -598,7 +592,7 @@ mod tests {
             start: 0,
             end: 20,
         };
-        let (reads, reference, max_depth) =
+        let (reads, reference) =
             create_plot_data("tests/reads.bam", "tests/reference.fa", &region, 100).unwrap();
         let expected_reference = Reference {
             start: 0,
@@ -615,10 +609,8 @@ mod tests {
             mpos: 789264,
         };
         let expected_reads = vec![expected_read];
-        let expected_max_depth = json!(1_u32);
         assert_eq!(reference, expected_reference);
         assert_eq!(reads, expected_reads);
-        assert_eq!(max_depth, expected_max_depth);
     }
 
     #[test]

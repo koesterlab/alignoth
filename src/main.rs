@@ -14,14 +14,13 @@ use structopt::StructOpt;
 
 fn main() -> Result<()> {
     let opt = cli::Alignoth::from_args();
-    let (read_data, reference_data, plot_depth) = create_plot_data(
+    let (read_data, reference_data) = create_plot_data(
         &opt.bam_path,
         &opt.reference,
         &opt.region,
         opt.max_read_depth,
     )?;
     let mut plot_specs: Value = serde_json::from_str(include_str!("../resources/plot.vl.json"))?;
-    plot_specs["height"] = json!(8 + 8 * plot_depth);
     plot_specs["width"] = json!(min(opt.max_width, 5 * (opt.region.length())));
     plot_specs["encoding"]["x"]["scale"]["domain"] = json!(vec![
         opt.region.start as f32 - 0.5,

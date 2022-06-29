@@ -17,18 +17,20 @@ A tool for creating alignment plots from bam files. The generated [vega-lite](ht
 
 The following options are available when using bamboo:
 
-| argument         | short | explanation                                                                                                 | default |
-|------------------|-------|-------------------------------------------------------------------------------------------------------------|---------|
-| bam-path         | -b    | The bam file to be visualized.                                                                              |         |
-| reference        | -r    | The path to the reference fasta file                                                                        |         |
-| region           | -g    | Chromosome and region for the visualization. Example: 2:132424-132924                                       |         |
-| highlight        | -h    | Interval that will be highlighted in the visualization. Example: 132400-132500                              |         |
-| max-read-depth   | -d    | Set the maximum rows of reads that will be shown in the alignment plots                                     | 500     |
-| output           | -o    | If present, data and vega-lite specs of the generated plot will be split and written to the given directory |         |
-| data-format      | -f    | Sets the output format for the read, reference and highlight data                                           | json    |
-| spec-output      |       | If present vega-lite specs will be written to the given file path                                           |         |
-| read-data-output |       | If present read data will be written to the given file path                                                 |         |
-| ref-data-output  |       | If present reference data will be written to the given file path                                            |         |
+| argument              | short | explanation                                                                                                 | default |
+|-----------------------|-------|-------------------------------------------------------------------------------------------------------------|---------|
+| bam-path              | -b    | The bam file to be visualized.                                                                              |         |
+| reference             | -r    | The path to the reference fasta file                                                                        |         |
+| region                | -g    | Chromosome and region for the visualization. Example: 2:132424-132924                                       |         |
+| highlight             | -h    | Interval that will be highlighted in the visualization. Example: 132400-132500                              |         |
+| max-read-depth        | -d    | Set the maximum rows of reads that will be shown in the alignment plots                                     | 500     |
+| max-width             | -w    | Set the maximum width of the resulting alignment plot                                                       | 1024    |
+| output                | -o    | If present, data and vega-lite specs of the generated plot will be split and written to the given directory |         |
+| data-format           | -f    | Sets the output format for the read, reference and highlight data                                           | json    |
+| spec-output           |       | If present vega-lite specs will be written to the given file path                                           |         |
+| read-data-output      |       | If present read data will be written to the given file path                                                 |         |
+| ref-data-output       |       | If present reference data will be written to the given file path                                            |         |
+| highlight-data-output |       | If present highlight data will be written to the given file path                                            |         |
 
 ## Installation
 
